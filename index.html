@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry, My Love 🥹❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 15px;
+  font-family: "Trebuchet MS", sans-serif;
+  background: linear-gradient(135deg, #ffe0eb, #f2dfff, #fff0e5);
+  color: #75465a;
+  overflow-x: hidden;
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0;
+  }
+  20% { opacity: 0.8; }
+  100% {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  padding: 28px 20px;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 28px;
+  background: #ffffffcf;
+  box-shadow: 0 18px 55px #bd759a30;
+}
+
+h1 {
+  color: #d65388;
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.teddy {
+  display: inline-block;
+  position: relative;
+  font-size: 100px;
+  margin: 10px 0;
+  cursor: pointer;
+  animation: teddyMove 2s ease-in-out infinite;
+  filter: drop-shadow(0 8px 8px #c87b9940);
+}
+
+@keyframes teddyMove {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.tears {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  animation: tearMove 1s ease-in-out infinite;
+}
+
+@keyframes tearMove {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: 8px; }
+}
+
+.instruction {
+  font-size: 14px;
+  margin: 8px 0 20px;
+}
+
+/* ENVELOPE */
+.envelope {
+  position: relative;
+  width: 230px;
+  height: 145px;
+  margin: 15px auto 25px;
+  cursor: pointer;
+  perspective: 900px;
+  transition: margin-bottom .6s ease;
+}
+
+.env-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: #f5a3bd;
+  box-shadow: 0 8px 20px #b55b7b35;
+}
+
+.env-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f18caf, #ffcad9);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 6px;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 115px solid transparent;
+  border-right: 115px solid transparent;
+  border-top: 82px solid #ee82a6;
+  transform-origin: top center;
+  transition: transform .7s ease;
+  z-index: 5;
+}
+
+.seal {
+  position: absolute;
+  z-index: 6;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  transition: opacity .3s;
+}
+
+/* PAPER LETTER */
+.letter {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+  height: 125px;
+  overflow: hidden;
+  z-index: 2;
+  padding: 18px 16px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #fffaf0 0px,
+      #fffaf0 27px,
+      #e8dcc9 28px,
+      #fffaf0 29px
+    );
+
+  border: 1px solid #e6d4b8;
+  border-radius: 3px;
+  box-shadow: inset 0 0 18px #d2b88a25;
+  color: #503a34;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+
+  transition:
+    transform .7s ease,
+    height .7s ease;
+}
+
+.letter h2 {
+  text-align: center;
+  color: #b34f70;
+  font-size: 21px;
+  margin-bottom: 15px;
+}
+
+.letter p {
+  margin-bottom: 13px;
+  overflow-wrap: break-word;
+}
+
+.letter .signature {
+  color: #a64466;
+  text-align: right;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* OPEN ANIMATION */
+.envelope.open {
+  margin-bottom: 300px;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.envelope.open .letter {
+  height: 440px;
+  transform: translateY(-105px);
+  z-index: 7;
+  overflow-y: auto;
+  padding: 22px 18px;
+  background-color: #fffaf0;
+  box-shadow: 0 12px 28px #81546a35;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 24px;
+  color: white;
+  background: linear-gradient(135deg, #ec78a1, #d84e84);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #d96c9630;
+  transition: transform .2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.footer {
+  margin-top: 20px;
+  color: #a66b84;
+  font-size: 12px;
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: 23px; }
+  .container { padding: 24px 12px; }
+  .envelope { transform: scale(.9); }
+  .envelope.open { margin-bottom: 270px; }
+  .envelope.open .letter { height: 410px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<main class="container">
+
+  <h1>I'm Sorry, My Love 🥹❤️</h1>
+  <p class="subtitle">A little teddy has something to tell you...</p>
+
+  <div class="teddy" id="teddy">
+    🧸
+    <span class="tears">💧🥺💧</span>
+  </div>
+
+  <p class="instruction" id="instruction">
+    Please open my little letter... 🥹
+  </p>
+
+  <div class="envelope" id="envelope">
+    <div class="env-body"></div>
+
+    <div class="letter">
+      <h2>My Dearest vaibhavi 💌</h2>
+
+    My Love ❤️🥹
+
+Mala mahit nahi ki majhya words madhun mi majhya manatla sagla tula kasa sangu, pan aaj mala fakt evdhach sangaycha aahe ki I'm genuinely sorry, my love. 🥺❤️
+
+Kadhi kadhi aapan jyanchyavar saglyat jast prem karto, tyannach nakalat hurt karto. Majhyakadun suddha asach kahi zala asel, ani tyamule tujhya manala tras zala asel, tar mala manapasun maaf kar. Majha intention tula hurt karaycha kadhich navhta, pan mala he suddha kalta ki fakt intention changla asna puresa nasto; majhya actions mule tula kasa vatla, he suddha titkach important aahe.
+
+Tu majhya life madhli fakt ek person nahiyes, Vaibhavi. Tu majha happiness ahes, majhi favourite person ahes, majhyashi sagla share karu shaknari majhi best friend ahes. Tujhyashi bolna, tujh hasna baghna, tujhya chotya-chotya goshti aikna ya saglyat mala ek veglach sukoon milto. Ani jevha majhyamule tu upset hote, tevha mala janavta ki aaplya relationship madhye tujhya feelings samjun ghena ani tyanchi kalji ghena kiti important aahe. 🫂❤️
+
+Mala tujhya tears peksha tujhya smile chi, misunderstandings peksha aaplya understanding chi, ani ego peksha aaplya love chi jast kalji ghyaychi aahe. Mi perfect nahiye, majhyakadun mistakes hotil, pan majhya mistakes la excuse banvaycha nahiye. Mala tya samjun ghaychya aahet ani swatahla improve karaycha aahe.
+
+I'm sorry for the moments when I made you feel hurt, unheard, or less important than you truly are.🥹💗 Tu majhyasathi khup precious ahes, ani mala te fakt words madhun nahi, tar majhya behaviour madhun suddha dakhvaycha aahe.
+
+Mi ashi expectation thevat nahi ki tu ha note vachlyavar lagech sagla visrun jashil. Tula je vatat aahe te feel karaycha purna hakk aahe. Tula vel hava asel tar mi to respect karin, ani tula bolaycha asel tar mi tujh aikayla ready aahe. Mala fakt aaplyatla problem samjun gheun, ekmekanchya feelings chi kalji ghet pudhe jaycha aahe.
+
+Vaibhavi, aaplya ya don varshanchya journey madhye aapan kiti tari memories banvalya aahet. Hasloy, bhandloy, ekmekanna samjun ghetlay, ani ekmekansobat khup sundar moments jagloy. Majhyasathi ya memories khup special aahet. Mala aaplya relationship madhye fakt happy moments nahi, tar difficult moments suddha maturity ani understanding ne handle karayla shikaycha aahe.
+
+I'm sorry, my love. Not just because things feel wrong right now, but because your feelings matter to me, even when I fail to understand them properly. ❤️
+
+Tu majhya life madhla ek khup sundar part ahes, ani mala aaplya bond chi kalji ghyaychi aahe. Mala tujhya sobat hasaycha aahe, tujhya goshti aikaychya aahet, tujhya dreams la support karaycha aahe, ani aaplya relationship la roj thoda-thoda better banvaycha aahe.
+
+So, my love, please majhi sorry aik. 🥺🫂 Mi tula hurt zala asel tar tyabaddal genuinely sorry aahe. Mala tujhya feelings samjun ghyayla ani majhya chuka sudharayla ek chance de na
+
+I love you, Vaibhavi. Not just in the easy moments, but also in the moments when I need to learn, understand, and become a better partner for you. ❤️🧿
+
+
+My World, My Life. 🧿🪬
+
+      <p class="signature">
+        Always with love, ❤️<br>
+        Your Sangram 🥹🧿
+      </p>
+    </div>
+
+    <div class="flap"></div>
+    <div class="seal">❤️</div>
+  </div>
+
+  <button id="openBtn">Open My Sorry Note 💌</button>
+
+  <p class="footer">Made with love, just for you 🫂💗</p>
+
+</main>
+
+<script>
+const envelope = document.getElementById("envelope");
+const openBtn = document.getElementById("openBtn");
+const teddy = document.getElementById("teddy");
+const instruction = document.getElementById("instruction");
+
+function toggleLetter() {
+  const isOpen = envelope.classList.toggle("open");
+
+  openBtn.textContent = isOpen
+    ? "Close My Letter 💌"
+    : "Open My Sorry Note 💌";
+
+  instruction.textContent = isOpen
+    ? "Read it with all my love ❤️"
+    : "Please open my little letter... 🥹";
+}
+
+openBtn.addEventListener("click", toggleLetter);
+
+envelope.addEventListener("click", toggleLetter);
+
+teddy.addEventListener("click", function() {
+  teddy.style.transform = "scale(1.25) rotate(-8deg)";
+  instruction.textContent = "My little heart says sorry... 🥹💗";
+
+  setTimeout(function() {
+    teddy.style.transform = "";
+  }, 500);
+});
+
+// Floating hearts
+const hearts = document.getElementById("hearts");
+const symbols = ["❤️", "💗", "💕", "💖", "🫶"];
+
+for (let i = 0; i < 20; i++) {
+  const heart = document.createElement("span");
+  heart.className = "heart";
+  heart.textContent = symbols[i % symbols.length];
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.animationDelay = Math.random() * 7 + "s";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  heart.style.fontSize = (14 + Math.random() * 18) + "px";
+  hearts.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
